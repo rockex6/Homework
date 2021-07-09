@@ -1,0 +1,14 @@
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true"/>
+    <debug-overrides>
+
+        <trust-anchors>
+            <!--charles 抓包用-->
+            <!-- Trust user added CAs while debuggable only -->
+
+            <certificates src="user" />
+
+        </trust-anchors>
+
+    </debug-overrides>
+</network-security-config>
