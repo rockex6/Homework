@@ -1,4 +1,6 @@
-package com.rockex6.homework.home.model
+package com.rockex6.homework.ui.zoolist.model
+
+import java.io.Serializable
 
 data class ZooListModel(
     val result: ZooListResults)
@@ -6,6 +8,7 @@ data class ZooListModel(
 
 data class ZooListResults(
     val results: MutableList<ZooListResult>)
+
 
 data class ZooListResult(
     val E_Pic_URL: String,
@@ -16,4 +19,4 @@ data class ZooListResult(
     val E_Name: String,
     val _id: Int,
     val E_URL: String,
-)
+) : Serializable

@@ -1,6 +1,6 @@
 package com.rockex6.homework.api
 
-import com.rockex6.homework.home.model.ZooListModel
+import com.rockex6.homework.ui.zoolist.model.ZooListModel
 import retrofit2.Call
 import retrofit2.http.GET
 

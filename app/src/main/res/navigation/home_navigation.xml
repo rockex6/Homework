@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@+id/nav_zoo_list">
+
+    <fragment
+        android:id="@+id/nav_zoo_list"
+        android:name="com.rockex6.homework.ui.zoolist.ZooListFragment"
+        android:label="@string/home_list"
+        tools:layout="@layout/fragment_zoo_list">
+        <action
+            android:id="@+id/navToZooDetailFragment"
+            app:destination="@id/nav_zoo_detail" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_zoo_detail"
+        android:name="com.rockex6.homework.ui.zoodetail.ZooDetailFragment"
+        android:label="fragment_item_detail"
+        tools:layout="@layout/fragment_zoo_detail" />
+
+</navigation>

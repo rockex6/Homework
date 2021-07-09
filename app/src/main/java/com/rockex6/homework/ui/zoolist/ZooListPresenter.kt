@@ -1,4 +1,4 @@
-package com.rockex6.homework.home
+package com.rockex6.homework.ui.zoolist
 
 interface ZooListPresenter {
 
