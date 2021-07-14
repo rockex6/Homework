@@ -2,4 +2,9 @@
     <string name="app_name">Homework</string>
 
     <string name="home_list">台北市立動物園</string>
+
+    <string name="list_no_memo">無休館資訊</string>
+    <string name="list_to_detail_img_transition_name">zoo_img</string>
+
+    <string name="detail_open_in_web">在網頁開啟</string>
 </resources>

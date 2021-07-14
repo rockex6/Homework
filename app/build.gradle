@@ -64,4 +64,11 @@ dependencies {
     //Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
+    //csv
+    implementation("com.github.doyaaaaaken:kotlin-csv-jvm:0.7.3")
+
+    //coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
+
 }

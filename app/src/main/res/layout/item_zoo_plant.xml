@@ -8,16 +8,17 @@
 
 
     <com.rockex6.homework.customview.ProportionImageView
-        android:id="@+id/vZooImg"
+        android:id="@+id/vPlantImg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher"
+        android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/vZooName"
+        android:id="@+id/vPlantName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -25,10 +26,10 @@
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/vZooImg" />
+        app:layout_constraintTop_toTopOf="@+id/vPlantImg" />
 
     <TextView
-        android:id="@+id/vZooDescription"
+        android:id="@+id/vPlantDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -38,20 +39,7 @@
         android:text="描述描述描述"
         app:layout_constraintEnd_toStartOf="@id/vRightArrow"
         app:layout_constraintStart_toEndOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/vZooName" />
-
-    <TextView
-        android:id="@+id/vZooMemo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:text="備註"
-        app:layout_constraintEnd_toStartOf="@id/vRightArrow"
-        app:layout_constraintStart_toEndOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/vZooDescription" />
+        app:layout_constraintTop_toBottomOf="@id/vPlantName" />
 
 
     <ImageView
@@ -60,7 +48,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/icon_arrow_right"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/vZooDescription" />
+        app:layout_constraintTop_toTopOf="@+id/vPlantDescription" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

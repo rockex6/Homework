@@ -1,56 +1,79 @@
 package com.rockex6.homework.ui.zoolist
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
+import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rockex6.homework.R
 import com.rockex6.homework.databinding.FragmentZooListBinding
-import com.rockex6.homework.ui.zoolist.model.ZooListModel
+import com.rockex6.homework.ui.zoodetail.ZooDetailActivity
 import com.rockex6.homework.ui.zoolist.model.ZooListResult
+import com.rockex6.homework.ui.zoolist.model.ZooListResults
+
 
 class ZooListFragment : Fragment(), ZooListView {
 
 
     private lateinit var _binding: FragmentZooListBinding
-    private val zooListPresenter = ZooListPresenterCompl(this)
-    private val navController
-        get() = findNavController(this)
+    private val zooListPresenter by lazy { context?.let { ZooListPresenterCompl(it, this) } }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentZooListBinding.inflate(inflater, container, false)
-        zooListPresenter.getZooList()
-        _binding.aaa.setOnClickListener {
-            val extras = FragmentNavigatorExtras(it to "bbb")
-            navController.navigate(R.id.navToZooDetailFragment, null, null, extras)
-        }
         return _binding.root
     }
 
-    override fun onZooListGet(zooListModel: ZooListModel) {
-        _binding.vZooList.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = ZooListAdapter(zooListModel.result.results, object : ItemClickListener {
-                override fun onItemClickListener(item: ZooListResult, imageView: ImageView) {
-                    val extras = FragmentNavigatorExtras(imageView to "zoo_img")
-                    val bundle = bundleOf("data" to item)
-                    findNavController().navigate(R.id.navToZooDetailFragment, bundle, null, extras)
-                }
-            })
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getZooList()
+    }
+
+    override fun onZooListGet(zooListResult: ZooListResults) {
+        activity?.runOnUiThread {
+            _binding.vProgressBar.visibility = View.GONE
+            _binding.vZooList.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter =
+                    ZooListAdapter(context, zooListResult.results, object : ItemClickListener {
+                        override fun onItemClickListener(
+                            item: ZooListResult, imageView: ImageView) {
+                            val pairs = Pair<View, String>(imageView, item.E_no)
+                            val options =
+                                ActivityOptions.makeSceneTransitionAnimation(activity, pairs)
+                            val i = Intent(activity, ZooDetailActivity::class.java)
+                            i.putExtras(bundleOf("data" to item))
+                            if (options != null) {
+                                startActivity(i, options.toBundle())
+                            } else {
+                                startActivity(i)
+                            }
+                        }
+                    })
+                addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            }
+
         }
     }
 
-    override fun onError(message: String) {
+    private fun getZooList() {
+        _binding.vProgressBar.visibility = View.VISIBLE
+        _binding.refreshRL.refreshRL.visibility = View.GONE
+        zooListPresenter?.getZooList()
+    }
 
+    override fun onError(message: String) {
+        _binding.vProgressBar.visibility = View.GONE
+        _binding.refreshRL.refreshRL.visibility = View.VISIBLE
+        _binding.refreshRL.alertTV.text = message
+        _binding.refreshRL.refreshRL.setOnClickListener {
+            getZooList()
+        }
     }
 }

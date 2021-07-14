@@ -19,4 +19,4 @@ data class ZooListResult(
     val E_Name: String,
     val _id: Int,
     val E_URL: String,
-) : Serializable
+    var E_Memo: String) : Serializable

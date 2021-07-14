@@ -10,6 +10,7 @@
         android:name="com.rockex6.homework.ui.zoolist.ZooListFragment"
         android:label="@string/home_list"
         tools:layout="@layout/fragment_zoo_list">
+
         <action
             android:id="@+id/navToZooDetailFragment"
             app:destination="@id/nav_zoo_detail" />
@@ -20,6 +21,12 @@
         android:id="@+id/nav_zoo_detail"
         android:name="com.rockex6.homework.ui.zoodetail.ZooDetailFragment"
         android:label="fragment_item_detail"
-        tools:layout="@layout/fragment_zoo_detail" />
+        tools:layout="@layout/fragment_zoo_detail">
+
+        <action
+            android:id="@+id/navToZooListFragment"
+            app:destination="@id/nav_zoo_list" />
+
+    </fragment>
 
 </navigation>
