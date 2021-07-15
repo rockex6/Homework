@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.zoodetail.ZooDetailActivity" />
+        <activity android:name=".ui.webview.WebActivity"/>
     </application>
 
 </manifest>

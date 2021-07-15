@@ -28,7 +28,7 @@ class ZooListPresenterCompl(private val context: Context, private val zooListVie
                                 zooListView.onZooListGet(it.result)
                             }
                     } else {
-                        zooListView.onError(response.message())
+                        getZooListFromCSV()
                     }
                 }
 
@@ -43,7 +43,7 @@ class ZooListPresenterCompl(private val context: Context, private val zooListVie
     }
 
     private fun getZooListFromCSV() {
-        CSVReader(context.assets.open("ist.csv"), "Big5") {
+        CSVReader.getDataFromCsv(context.assets.open("list.csv"), "Big5") {
             val zooListResults = DataParser.getGson()
                 .fromJson(it.toString(), ZooListResults::class.java)
             zooListView.onZooListGet(zooListResults)

@@ -28,9 +28,11 @@ class ZooDetailPresenterCompl(
                         ) {
                             getPlantListFromCSV(keyword)
                         } else {
-
+//                            zooDetailView.onZooPlantListGet(result)
                         }
 
+                    } else {
+                        getPlantListFromCSV(keyword)
                     }
                 }
 
@@ -45,7 +47,7 @@ class ZooDetailPresenterCompl(
     }
 
     private fun getPlantListFromCSV(keyword: String) {
-        CSVReader(context.assets.open("zoo_plant.csv"), "UTF-8") {
+        CSVReader.getDataFromCsv(context.assets.open("zoo_plant.csv"), "UTF-8") {
             val jsonArray = it.optJSONArray("results")!!
             val tempList = ArrayList<ZooPlantModel>()
             val result = ArrayList<ZooPlantModel>()

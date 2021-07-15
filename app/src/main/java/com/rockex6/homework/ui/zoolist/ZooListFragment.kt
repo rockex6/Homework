@@ -21,13 +21,14 @@ import com.rockex6.homework.ui.zoolist.model.ZooListResults
 class ZooListFragment : Fragment(), ZooListView {
 
 
-    private lateinit var _binding: FragmentZooListBinding
+    private var _binding: FragmentZooListBinding? = null
+    private val binding get() = _binding!!
     private val zooListPresenter by lazy { context?.let { ZooListPresenterCompl(it, this) } }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentZooListBinding.inflate(inflater, container, false)
-        return _binding.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,8 +38,8 @@ class ZooListFragment : Fragment(), ZooListView {
 
     override fun onZooListGet(zooListResult: ZooListResults) {
         activity?.runOnUiThread {
-            _binding.vProgressBar.visibility = View.GONE
-            _binding.vZooList.apply {
+            binding.vProgressBar.visibility = View.GONE
+            binding.vZooList.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter =
                     ZooListAdapter(context, zooListResult.results, object : ItemClickListener {
@@ -63,17 +64,22 @@ class ZooListFragment : Fragment(), ZooListView {
     }
 
     private fun getZooList() {
-        _binding.vProgressBar.visibility = View.VISIBLE
-        _binding.refreshRL.refreshRL.visibility = View.GONE
+        binding.vProgressBar.visibility = View.VISIBLE
+        binding.refreshRL.refreshRL.visibility = View.GONE
         zooListPresenter?.getZooList()
     }
 
     override fun onError(message: String) {
-        _binding.vProgressBar.visibility = View.GONE
-        _binding.refreshRL.refreshRL.visibility = View.VISIBLE
-        _binding.refreshRL.alertTV.text = message
-        _binding.refreshRL.refreshRL.setOnClickListener {
+        binding.vProgressBar.visibility = View.GONE
+        binding.refreshRL.refreshRL.visibility = View.VISIBLE
+        binding.refreshRL.alertTV.text = message
+        binding.refreshRL.refreshRL.setOnClickListener {
             getZooList()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

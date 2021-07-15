@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="名字名字名字名字"
+        android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/guideline"
@@ -36,6 +37,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:text="描述描述描述"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/vRightArrow"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/vZooName" />
@@ -46,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
+        android:textColor="@android:color/holo_red_light"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="備註"

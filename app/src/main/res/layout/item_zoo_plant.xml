@@ -11,8 +11,8 @@
         android:id="@+id/vPlantImg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher"
         android:scaleType="fitCenter"
+        android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="名字名字名字名字"
+        android:textColor="@color/black"
         android:textSize="18dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/guideline"
@@ -37,6 +38,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:text="描述描述描述"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@id/vRightArrow"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toBottomOf="@id/vPlantName" />

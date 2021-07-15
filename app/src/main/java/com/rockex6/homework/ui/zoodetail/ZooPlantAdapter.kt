@@ -25,6 +25,9 @@ class ZooPlantAdapter(
         holder.vPlantName.text = data[position].F_Name_Ch
         holder.vPlantDescription.text = data[position].F_AlsoKnown
         holder.vPlantImg.loadImage(context, data[position].F_Pic01_URL)
+        holder.itemView.setOnClickListener {
+            onItemClickListener.onItemClickListener(data[position])
+        }
 
     }
 
@@ -45,5 +48,5 @@ class ZooPlantViewHolder(private val binding: ItemZooPlantBinding) :
 
 
 interface ItemClickListener {
-    fun onItemClickListener(item: ZooPlantModel, imageView: ImageView)
+    fun onItemClickListener(item: ZooPlantModel)
 }
