@@ -15,7 +15,7 @@ import com.rockex6.homework.ui.zoolist.model.ZooListResult
 class ZooListAdapter(
     private val context: Context,
     private val data: MutableList<ZooListResult>,
-    private val onItemClickListener: ItemClickListener) :
+    private val onItemClickListener: (ZooListResult, ImageView) -> Unit) :
     RecyclerView.Adapter<ZooListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ZooListViewHolder {
         val binging = ItemZooListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,7 +34,7 @@ class ZooListAdapter(
         }
         holder.vZooImg.transitionName = data[position].E_no
         holder.itemView.setOnClickListener {
-            onItemClickListener.onItemClickListener(data[position], holder.vZooImg)
+            onItemClickListener.invoke(data[position], holder.vZooImg)
         }
     }
 
@@ -54,9 +54,4 @@ class ZooListViewHolder(private val binding: ItemZooListBinding) :
     val vZooName: TextView = binding.vZooName
     val vZooDescription: TextView = binding.vZooDescription
     val vZooMemo: TextView = binding.vZooMemo
-}
-
-
-interface ItemClickListener {
-    fun onItemClickListener(item: ZooListResult, imageView: ImageView)
 }

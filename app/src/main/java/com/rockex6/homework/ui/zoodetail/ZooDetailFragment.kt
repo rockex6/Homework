@@ -68,15 +68,14 @@ class ZooDetailFragment : Fragment(), ZooDetailView {
             binding.vProgress.visibility = View.GONE
             binding.vPlantList.apply {
                 layoutManager = LinearLayoutManager(context)
-                adapter = ZooPlantAdapter(context, zooPlantList, object : ItemClickListener {
-                    override fun onItemClickListener(item: ZooPlantModel) {
-                        (activity!! as AppCompatActivity).supportActionBar?.title = item.F_Name_Ch
-                        childFragmentManager.beginTransaction()
-                            .addToBackStack(null)
-                            .replace(R.id.vContent, ZooPlantFragment(item))
-                            .commit()
-                    }
-                })
+                adapter = ZooPlantAdapter(context, zooPlantList) { zooPlantModel ->
+                    (requireActivity() as AppCompatActivity).supportActionBar?.title =
+                        zooPlantModel.F_Name_Ch
+                    childFragmentManager.beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.vContent, ZooPlantFragment(zooPlantModel))
+                        .commit()
+                }
             }
         }
     }

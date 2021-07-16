@@ -7,14 +7,12 @@ import android.util.Pair
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rockex6.homework.databinding.FragmentZooListBinding
 import com.rockex6.homework.ui.zoodetail.ZooDetailActivity
-import com.rockex6.homework.ui.zoolist.model.ZooListResult
 import com.rockex6.homework.ui.zoolist.model.ZooListResults
 
 
@@ -42,21 +40,17 @@ class ZooListFragment : Fragment(), ZooListView {
             binding.vZooList.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter =
-                    ZooListAdapter(context, zooListResult.results, object : ItemClickListener {
-                        override fun onItemClickListener(
-                            item: ZooListResult, imageView: ImageView) {
-                            val pairs = Pair<View, String>(imageView, item.E_no)
-                            val options =
-                                ActivityOptions.makeSceneTransitionAnimation(activity, pairs)
-                            val i = Intent(activity, ZooDetailActivity::class.java)
-                            i.putExtras(bundleOf("data" to item))
-                            if (options != null) {
-                                startActivity(i, options.toBundle())
-                            } else {
-                                startActivity(i)
-                            }
+                    ZooListAdapter(context, zooListResult.results) { zooListResult, imageView ->
+                        val pairs = Pair<View, String>(imageView, zooListResult.E_no)
+                        val options = ActivityOptions.makeSceneTransitionAnimation(activity, pairs)
+                        val i = Intent(activity, ZooDetailActivity::class.java)
+                        i.putExtras(bundleOf("data" to zooListResult))
+                        if (options != null) {
+                            startActivity(i, options.toBundle())
+                        } else {
+                            startActivity(i)
                         }
-                    })
+                    }
                 addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             }
 

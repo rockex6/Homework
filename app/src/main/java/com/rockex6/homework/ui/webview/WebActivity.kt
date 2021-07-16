@@ -1,13 +1,13 @@
 package com.rockex6.homework.ui.webview
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.core.os.bundleOf
 import com.rockex6.homework.BaseActivity
+import com.rockex6.homework.api.Logger
 import com.rockex6.homework.databinding.ActivityWebBinding
 
 class WebActivity : BaseActivity() {
@@ -37,7 +37,7 @@ class WebActivity : BaseActivity() {
     }
 
     private fun init() {
-        Log.d(TAG, "web url : $webUrl")
+        Logger.d(TAG, "web url : $webUrl")
         if (webUrl.isEmpty()) {
             finish()
         }

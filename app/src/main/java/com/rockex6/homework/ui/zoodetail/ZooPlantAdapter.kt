@@ -13,7 +13,7 @@ import com.rockex6.homework.ui.zoodetail.model.ZooPlantModel
 class ZooPlantAdapter(
     private val context: Context,
     private val data: MutableList<ZooPlantModel>,
-    private val onItemClickListener: ItemClickListener) :
+    private val onItemClickListener: (ZooPlantModel) -> Unit) :
     RecyclerView.Adapter<ZooPlantViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ZooPlantViewHolder {
         val binding =
@@ -26,7 +26,7 @@ class ZooPlantAdapter(
         holder.vPlantDescription.text = data[position].F_AlsoKnown
         holder.vPlantImg.loadImage(context, data[position].F_Pic01_URL)
         holder.itemView.setOnClickListener {
-            onItemClickListener.onItemClickListener(data[position])
+            onItemClickListener.invoke(data[position])
         }
 
     }
@@ -44,9 +44,4 @@ class ZooPlantViewHolder(private val binding: ItemZooPlantBinding) :
     val vPlantImg: ImageView = binding.vPlantImg
     val vPlantName: TextView = binding.vPlantName
     val vPlantDescription: TextView = binding.vPlantDescription
-}
-
-
-interface ItemClickListener {
-    fun onItemClickListener(item: ZooPlantModel)
 }
