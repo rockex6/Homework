@@ -52,7 +52,7 @@ class ZooDetailFragment : Fragment(), ZooDetailView {
             }
             binding.vZooImg.loadImage(context, data.E_Pic_URL)
         }
-        zooDetailPresenter?.getZooPlantList(data.E_Name)
+        getPlantList()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,8 +80,19 @@ class ZooDetailFragment : Fragment(), ZooDetailView {
         }
     }
 
+    private fun getPlantList() {
+        zooDetailPresenter?.getZooPlantList(data.E_Name)
+        binding.vProgress.visibility = View.VISIBLE
+        binding.vRefresh.refreshRL.visibility = View.GONE
+    }
 
     override fun onError(message: String) {
+        binding.vProgress.visibility = View.GONE
+        binding.vRefresh.refreshRL.visibility = View.VISIBLE
+        binding.vRefresh.alertTV.text = message
+        binding.vRefresh.refreshRL.setOnClickListener {
+            getPlantList()
+        }
     }
 
     override fun onDestroy() {
